@@ -16,11 +16,9 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.hostname == akswnc4.aksw.uni-leipzig.de
       labels:
         traefik.docker.network: hbase
+        traefik.http.namenode.rule: Host(`namenode.lidotcircle.ltd`)
         traefik.port: 50070
 
   datanode:
@@ -54,9 +52,6 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.hostname == akswnc4.aksw.uni-leipzig.de
       labels:
         traefik.docker.network: hbase
         traefik.port: 8088
@@ -92,9 +87,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      placement:
-        constraints:
-          - node.hostname == akswnc4.aksw.uni-leipzig.de
       labels:
         traefik.docker.network: hbase
         traefik.port: 8188

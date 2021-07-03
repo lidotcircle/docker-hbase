@@ -1,5 +1,9 @@
 traefik:
-	docker service create --name traefik --constraint node.hostname==akswnc4.aksw.uni-leipzig.de --publish 80:80 --publish 8080:8080 --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock --network hbase traefik --docker --docker.swarmmode --docker.domain=cluster.aksw.org --docker.watch --web --logLevel=DEBUG
+	docker service create --name traefik \
+		--publish 80:80 --publish 8080:8080 \
+		--mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
+		--network hbase \
+		traefik:v2.4 --api.insecure=true --providers.docker
 
 network:
 	docker network create -d overlay --attachable hbase

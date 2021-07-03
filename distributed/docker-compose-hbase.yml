@@ -11,12 +11,10 @@ services:
       endpoint_mode: dnsrr
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.hostname == akswnc4.aksw.uni-leipzig.de
       labels:
-        traefik.docker.network: hbase
-        traefik.port: 16010
+        - traefik.docker.network=hbase
+        - traefik.http.routers.hbase-master.rule=Host(`hello.lidotcircle.ldy`)
+        - traefik.port=16010
     env_file:
       - ./hbase.env
 
@@ -30,9 +28,6 @@ services:
       endpoint_mode: dnsrr
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.hostname == akswnc4.aksw.uni-leipzig.de
     env_file:
       - ./hbase.env
     environment:
@@ -48,9 +43,6 @@ services:
       endpoint_mode: dnsrr
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.hostname == akswnc5.aksw.uni-leipzig.de
     env_file:
       - ./hbase.env
     environment:
@@ -66,9 +58,6 @@ services:
       endpoint_mode: dnsrr
       restart_policy:
         condition: on-failure
-      placement:
-        constraints:
-          - node.hostname == akswnc6.aksw.uni-leipzig.de
     env_file:
       - ./hbase.env
     environment:
